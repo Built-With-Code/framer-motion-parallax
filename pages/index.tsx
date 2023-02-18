@@ -1,19 +1,10 @@
-import { motion, useScroll, useTransform } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useRef } from "react";
 import FeatureCard from "../components/FeatureCard";
 import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
-  let ref = useRef(null);
-  let { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  let y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-
   return (
     <div className="flex flex-col bg-black min-h-[200vh]">
       <Head>
@@ -21,7 +12,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="relative w-full max-h-[40rem] h-screen" ref={ref}>
+      <header className="relative w-full max-h-[40rem] h-screen">
         <div className="relative flex flex-col h-full z-10">
           <Navbar />
           <div className="flex-1 flex justify-center items-center">
@@ -30,10 +21,7 @@ const Home: NextPage = () => {
             </h1>
           </div>
         </div>
-        <motion.div
-          className="absolute top-0 left-0 right-0 bottom-0"
-          style={{ y }}
-        >
+        <div className="absolute top-0 left-0 right-0 bottom-0">
           <video
             className="w-full h-full object-cover"
             loop
@@ -44,7 +32,7 @@ const Home: NextPage = () => {
             <source src="/assets/hero.mp4" type="video/mp4" />
           </video>
           <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-transparent to-black" />
-        </motion.div>
+        </div>
       </header>
 
       <main className="max-w-[70%] mx-auto my-8 z-50">
